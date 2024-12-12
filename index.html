@@ -101,9 +101,9 @@
 <body>
     <div class="scoring-container">
         <div>
-            <label>Tên Người Chấm:</label>
+            <label><b>평자가:</b></label>
             <select id="judgeNameInput" class="judge-select">
-                <option value="">Chọn Giám Khảo</option>
+                <option value="">평가자 선택</option>
                 <option value="Nguyễn Văn X">Nguyễn Văn X</option>
                 <option value="Trần Thị Y">Trần Thị Y</option>
                 <option value="Lê Văn Z">Lê Văn Z</option>
@@ -113,8 +113,8 @@
         </div>
 
         <div class="navigation-buttons">
-            <button id="prevBtn" class="button">Trước</button>
-            <button id="nextBtn" class="button">Sau</button>
+            <button id="prevBtn" class="button">다음</button>
+            <button id="nextBtn" class="button">전</button>
         </div>
 
         <h2 id="contestantName">Tên Thí Sinh</h2>
@@ -123,37 +123,37 @@
         <img id="contestantImage" src="https://via.placeholder.com/250x300" alt="Thí Sinh" class="contestant-image">
 
         <div>
-            <label>Sáng Tạo</label>
-            <input type="number" id="innovationScore" min="0" max="10" class="score-input" placeholder="Điểm sáng tạo (0-10)">
+            <label>Idea 발굴 관점</label>
+            <input type="number" id="innovationScore" min="0" max="40" class="score-input" placeholder="Idea 발굴 관점 (0-40)">
             <div id="innovationError" class="error-message"></div>
         </div>
 
         <div>
-            <label>Trình Bày</label>
-            <input type="number" id="presentationScore" min="0" max="10" class="score-input" placeholder="Điểm trình bày (0-10)">
+            <label>실효과 평가</label>
+            <input type="number" id="presentationScore" min="0" max="10" class="score-input" placeholder="실효과 평가 (0-30)">
             <div id="presentationError" class="error-message"></div>
         </div>
 
         <div>
-            <label>Kỹ Thuật</label>
-            <input type="number" id="technicalScore" min="0" max="10" class="score-input" placeholder="Điểm kỹ thuật (0-10)">
+            <label>Biz 파급 효과 관점</label>
+            <input type="number" id="technicalScore" min="0" max="30" class="score-input" placeholder="Biz 파급 효과 관점 (0-30)">
             <div id="technicalError" class="error-message"></div>
         </div>
 
         <div class="total-score">
-            Tổng Điểm: <span id="totalScore">0</span>
+            총 점수: <span id="totalScore">0</span>
         </div>
 
         <div>
-            <button id="saveBtn" class="button">Lưu Điểm</button>
+            <button id="saveBtn" class="button">점수 저장</button>
         </div>
     </div>
 
     <div id="overlay"></div>
     <div id="popup">
-        <h2>Chấm Điểm Thành Công</h2>
+        <h2>체점 성공</h2>
         <p id="popupMessage"></p>
-        <button id="closePopupBtn" class="button">Đóng</button>
+        <button id="closePopupBtn" class="button">닫기</button>
     </div>
 
     <script>
@@ -236,21 +236,21 @@
             // Check if input is empty
             if (input.value.trim() === '') {
                 input.classList.add('invalid');
-                errorEl.textContent = 'Vui lòng nhập điểm';
+                errorEl.textContent = '점수를 입력해 주세요';
                 return false;
             }
 
             // Check if value is a number
             if (isNaN(value)) {
                 input.classList.add('invalid');
-                errorEl.textContent = 'Vui lòng nhập số';
+                errorEl.textContent = '숫자를 입력해 주세요';
                 return false;
             }
 
             // Check if value is within range
             if (value < min || value > max) {
                 input.classList.add('invalid');
-                errorEl.textContent = `Điểm phải từ ${min} đến ${max}`;
+                errorEl.textContent = `점수는 ${min}부터 ${max}까지 입력해 주세요`;
                 return false;
             }
 
@@ -317,14 +317,14 @@
         function saveScore() {
             // Validate judge name
             const judgeName = judgeNameInput.value.trim();
-            if (!judgeName || judgeName === "Chọn Giám Khảo") {
-                alert('Vui lòng chọn tên người chấm');
+            if (!judgeName || judgeName === "평가자 선택 필요") {
+                alert('평자가를 선택해 주세요!');
                 return;
             }
 
             // Validate all scores
             if (!validateAllScores()) {
-                alert('Vui lòng kiểm tra lại điểm số');
+                alert('점수를 재확인해 주세요');
                 return;
             }
 
@@ -347,9 +347,9 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        showPopup(`Đã chấm điểm cho thí sinh ${contestant.name} thành công!`);
+                        showPopup(`${contestant.name}님에게 체점 성공!`);
                     } else {
-                        throw new Error('Lỗi khi lưu điểm');
+                        throw new Error('저장 오류');
                     }
                 })
                 .catch(error => {
