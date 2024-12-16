@@ -108,7 +108,7 @@
                 <option value="김희선 실장">김희선 실장</option>
                 <option value="송종훈 담당">송종훈 담당</option>
                 <option value="박진태 팀장">박진태 팀장</option>
-                <option value="Lã Tiến Quân">Lã Tiến Quân</option>
+                
             </select>
         </div>
 
@@ -117,9 +117,9 @@
             <button id="nextBtn" class="button">다음</button>
         </div>
 
-        <h2 id="contestantName">Tên Thí Sinh</h2>
+        <h2 id="contestantName">Tên Chủ Đề</h2>
+        <p id="contestantTeam">Team</p>
         <p id="contestantTopic">Đề Tài</p>
-
         <img id="contestantImage" src="https://via.placeholder.com/250x300" alt="Thí Sinh" class="contestant-image">
 
         <div>
@@ -160,41 +160,49 @@
         const contestants = [
             {
                 name: "생산운영 1",
+                team: "DX TEAM",
                 topic: "Ứng dụng AI trong Nông Nghiệp",
                 image: "image/LG Display.PNG"
             },
             {
-                name: "생산운영 2", 
+                name: "생산운영 2",
+                team: "DX TEAM",
                 topic: "Giải Pháp Môi Trường Thông Minh",
                 image: "https://via.placeholder.com/250x300"
             },
             {
                 name: "검사/품질 1",
+                team: "DX TEAM",
                 topic: "Hệ Thống Giao Thông Tự Động", 
                 image: "https://via.placeholder.com/250x300"
             },
             {
                 name: "검사/품질 2",
+                team: "DX TEAM",
                 topic: "Robot Hỗ Trợ Y Tế",
                 image: "https://via.placeholder.com/250x300"
             },
             {
                 name: "설계/개발 1",
+                team: "DX TEAM",
                 topic: "Ứng Dụng Blockchain Trong Giáo Dục",
                 image: "https://via.placeholder.com/250x300"
             },
             {
                 name: "설계/개발 2",
+                team: "DX TEAM",
                 topic: "Hệ Thống Năng Lượng Mặt Trời Thông Minh",
                 image: "https://via.placeholder.com/250x300"
             },
             {
                 name: "공정/장비 1",
+                team: "DX TEAM",
                 topic: "Phần Mềm Quản Lý Môi Trường",
                 image: "https://via.placeholder.com/250x300"
             },
             {
                 name: "공정/장비 2",
+                team: "DX TEAM",
                 topic: "Giải Pháp IoT Trong Nông Nghiệp",
                 image: "https://via.placeholder.com/250x300"
             }
@@ -205,6 +213,7 @@
 
         const nameEl = document.getElementById('contestantName');
         const topicEl = document.getElementById('contestantTopic');
+        const teamE1 = document.getElementById('contestantTeam');
         const imageEl = document.getElementById('contestantImage');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
@@ -270,6 +279,7 @@
             nameEl.textContent = contestant.name;
             topicEl.textContent = contestant.topic;
             imageEl.src = contestant.image;
+            teamE1.textContent = contestant.team;
 
             // Reset score inputs and errors
             innovationInput.value = '';
