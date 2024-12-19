@@ -298,19 +298,19 @@
                 image: "image/검사_품질 2.png"
             },
             {
-                name: "생산운영 1",
+                name: "운영/생산 1",
                 image: "image/생산운영 1.png"
             },
             {
-                name: "생산운영 2",
+                name: "운영/생산 2",
                 image: "image/생산운영 2.png"
             },
             {
-                name: "공정/장비 1",
+                name: "공정/설비 1",
                 image: "image/공정_장비 1.png"
             },
             {
-                name: "공정/장비 2",
+                name: "공정/설비 2",
                 image: "image/공정_장비 2.png"
             },
             {
@@ -448,29 +448,32 @@
             popupMessage.textContent = message;
             popup.style.display = 'block';
             overlay.style.display = 'block';
+
+            // Ẩn nút đóng khi hiển thị popup
+            closePopupBtn.style.display = 'none';
         }
 
         function closePopup() {
             popup.style.display = 'none';
             overlay.style.display = 'none';
+
+            // Hiển thị lại nút đóng nếu cần thiết sau khi popup bị ẩn
+            closePopupBtn.style.display = 'block';
         }
 
         function saveScore() {
-            // Disable the save button
             saveBtn.disabled = true;
 
-            // Validate judge name
             const judgeName = judgeNameInput.value.trim();
             if (!judgeName || judgeName === "평가자 선택 필요") {
                 alert('평자가를 선택해 주세요!');
-                saveBtn.disabled = false; // Re-enable the button if validation fails
+                saveBtn.disabled = false;
                 return;
             }
 
-            // Validate all scores
             if (!validateAllScores()) {
                 alert('점수를 재확인해 주세요');
-                saveBtn.disabled = false; // Re-enable the button if validation fails
+                saveBtn.disabled = false;
                 return;
             }
 
@@ -485,10 +488,8 @@
             };
 
             try {
-                // Save to sessionStorage
                 saveScoreToSessionStorage(scoreData);
 
-                // Send to Google Apps Script
                 fetch('https://script.google.com/macros/s/AKfycbwwGcBmKBw4wXja2lrLJKGtgYM5BT3SfTKhqijDb7ycx_zC4zY5IrJxNi4toq8WR1Z2PQ/exec', {
                     method: 'POST',
                     body: JSON.stringify(scoreData)
@@ -497,13 +498,13 @@
                     if (response.ok) {
                         showPopup(`${contestant.name}님에게 체점 성공!`);
 
-                        // Auto-navigate to next contestant if not the last one
+                        // Tự động chuyển sang thí sinh tiếp theo sau 1.5 giây
                         if (currentContestantIndex < contestants.length - 1) {
                             setTimeout(() => {
                                 currentContestantIndex++;
                                 updateContestantDisplay();
                                 closePopup();
-                            }, 1500); // Small delay to allow user to see success message
+                            }, 1500);
                         }
                     } else {
                         throw new Error('저장 오류');
@@ -514,14 +515,14 @@
                     alert('Lỗi: ' + error.message);
                 })
                 .finally(() => {
-                    // Re-enable the save button after the process finishes
                     saveBtn.disabled = false;
                 });
             } catch (error) {
                 alert('Lỗi: ' + error.message);
-                saveBtn.disabled = false; // Re-enable the button if there is an exception
+                saveBtn.disabled = false;
             }
         }
+
 
 
         prevBtn.addEventListener('click', () => {
