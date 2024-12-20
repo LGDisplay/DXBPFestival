@@ -457,17 +457,19 @@
 
         function saveScore() {
             saveBtn.disabled = true;
-
+            nextBtn.disabled = true;
             const judgeName = judgeNameInput.value.trim();
             if (!judgeName || judgeName === "평가자 선택 필요") {
                 alert('평자가를 선택해 주세요!');
                 saveBtn.disabled = false;
+                nextBtn.disabled = false;
                 return;
             }
 
             if (!validateAllScores()) {
                 alert('점수를 재확인해 주세요');
                 saveBtn.disabled = false;
+                nextBtn.disabled = false;
                 return;
             }
 
@@ -510,10 +512,12 @@
                 })
                 .finally(() => {
                     saveBtn.disabled = false;
+                    nextBtn.disabled = false;
                 });
             } catch (error) {
                 alert('Lỗi: ' + error.message);
                 saveBtn.disabled = false;
+                nextBtn.disabled = false;
             }
         }
 
