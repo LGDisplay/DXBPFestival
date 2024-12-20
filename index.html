@@ -448,17 +448,11 @@
             popupMessage.textContent = message;
             popup.style.display = 'block';
             overlay.style.display = 'block';
-
-            // Ẩn nút đóng khi hiển thị popup
-            closePopupBtn.style.display = 'none';
         }
 
         function closePopup() {
             popup.style.display = 'none';
             overlay.style.display = 'none';
-
-            // Hiển thị lại nút đóng nếu cần thiết sau khi popup bị ẩn
-            closePopupBtn.style.display = 'block';
         }
 
         function saveScore() {
