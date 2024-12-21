@@ -486,7 +486,7 @@
             try {
                 saveScoreToSessionStorage(scoreData);
 
-                fetch('https://script.google.com/macros/s/AKfycbzxoTk0i9Yo6UBEECwe3L5ozVi7wOp7GMtyZYDlr1zsxCh6LxYYxUPn0Og71sygn5gj/exec', {
+                fetch('https://script.google.com/macros/s/AKfycbwrLGc_KlHPhcWaPIxeavareBOCjP101CvpUb8Se0--JY-obQo-_DyJaEpU9rylqinC9g/exec', {
                     method: 'POST',
                     body: JSON.stringify(scoreData)
                 })
@@ -553,9 +553,10 @@
             technicalInput.value = '';
             totalScoreEl.textContent = '0';
         });
-        window.addEventListener('load', () => {
+        window.addEventListener('beforeunload', () => {
             sessionStorage.clear();
         });
+
         [innovationInput, presentationInput, technicalInput].forEach(input => {
             input.addEventListener('input', () => {
                 validateScore(input, 
